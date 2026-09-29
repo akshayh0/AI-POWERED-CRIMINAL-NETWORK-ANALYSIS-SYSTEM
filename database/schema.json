@@ -1,0 +1,286 @@
+{
+  "project": "Crime Analytics & Crime Intelligence Platform",
+  "datastore": {
+    "tables": [
+      {
+        "name": "State",
+        "columns": [
+          {"name": "StateID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "StateName", "type": "VARCHAR", "length": 100, "mandatory": true},
+          {"name": "NationalityID", "type": "BIGINT", "mandatory": false},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "District",
+        "columns": [
+          {"name": "DistrictID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "DistrictName", "type": "VARCHAR", "length": 100, "mandatory": true},
+          {"name": "StateID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "State", "foreign_key_column": "StateID"},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "UnitType",
+        "columns": [
+          {"name": "UnitTypeID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "UnitTypeName", "type": "VARCHAR", "length": 100, "mandatory": true},
+          {"name": "CityDistState", "type": "VARCHAR", "length": 50, "mandatory": false},
+          {"name": "Hierarchy", "type": "BIGINT", "mandatory": false},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "Unit",
+        "columns": [
+          {"name": "UnitID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "UnitName", "type": "VARCHAR", "length": 200, "mandatory": true},
+          {"name": "TypeID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "UnitType", "foreign_key_column": "UnitTypeID"},
+          {"name": "ParentUnit", "type": "BIGINT", "mandatory": false, "foreign_key_table": "Unit", "foreign_key_column": "UnitID"},
+          {"name": "NationalityID", "type": "BIGINT", "mandatory": false},
+          {"name": "StateID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "State", "foreign_key_column": "StateID"},
+          {"name": "DistrictID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "District", "foreign_key_column": "DistrictID"},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "Rank",
+        "columns": [
+          {"name": "RankID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "RankName", "type": "VARCHAR", "length": 100, "mandatory": true},
+          {"name": "Hierarchy", "type": "BIGINT", "mandatory": false},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "Designation",
+        "columns": [
+          {"name": "DesignationID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "DesignationName", "type": "VARCHAR", "length": 100, "mandatory": true},
+          {"name": "Active", "type": "BOOLEAN", "default": true},
+          {"name": "SortOrder", "type": "BIGINT", "mandatory": false}
+        ]
+      },
+      {
+        "name": "Employee",
+        "columns": [
+          {"name": "EmployeeID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "DistrictID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "District", "foreign_key_column": "DistrictID"},
+          {"name": "UnitID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Unit", "foreign_key_column": "UnitID"},
+          {"name": "RankID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Rank", "foreign_key_column": "RankID"},
+          {"name": "DesignationID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Designation", "foreign_key_column": "DesignationID"},
+          {"name": "KGID", "type": "VARCHAR", "length": 50, "mandatory": true, "unique": true},
+          {"name": "FirstName", "type": "VARCHAR", "length": 150, "mandatory": true},
+          {"name": "EmployeeDOB", "type": "DATE", "mandatory": false},
+          {"name": "GenderID", "type": "BIGINT", "mandatory": false},
+          {"name": "BloodGroupID", "type": "BIGINT", "mandatory": false},
+          {"name": "PhysicallyChallenged", "type": "BOOLEAN", "default": false},
+          {"name": "AppointmentDate", "type": "DATE", "mandatory": false}
+        ]
+      },
+      {
+        "name": "Court",
+        "columns": [
+          {"name": "CourtID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CourtName", "type": "VARCHAR", "length": 200, "mandatory": true},
+          {"name": "DistrictID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "District", "foreign_key_column": "DistrictID"},
+          {"name": "StateID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "State", "foreign_key_column": "StateID"},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "CaseCategory",
+        "columns": [
+          {"name": "CaseCategoryID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "LookupValue", "type": "VARCHAR", "length": 50, "mandatory": true}
+        ]
+      },
+      {
+        "name": "GravityOffence",
+        "columns": [
+          {"name": "GravityOffenceID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "LookupValue", "type": "VARCHAR", "length": 50, "mandatory": true}
+        ]
+      },
+      {
+        "name": "CrimeHead",
+        "columns": [
+          {"name": "CrimeHeadID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CrimeGroupName", "type": "VARCHAR", "length": 200, "mandatory": true},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "CrimeSubHead",
+        "columns": [
+          {"name": "CrimeSubHeadID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CrimeHeadID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CrimeHead", "foreign_key_column": "CrimeHeadID"},
+          {"name": "CrimeHeadName", "type": "VARCHAR", "length": 200, "mandatory": true},
+          {"name": "SeqID", "type": "BIGINT", "mandatory": false}
+        ]
+      },
+      {
+        "name": "CaseStatusMaster",
+        "columns": [
+          {"name": "CaseStatusID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CaseStatusName", "type": "VARCHAR", "length": 100, "mandatory": true}
+        ]
+      },
+      {
+        "name": "CasteMaster",
+        "columns": [
+          {"name": "caste_master_id", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "caste_master_name", "type": "VARCHAR", "length": 100, "mandatory": true}
+        ]
+      },
+      {
+        "name": "ReligionMaster",
+        "columns": [
+          {"name": "ReligionID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "ReligionName", "type": "VARCHAR", "length": 100, "mandatory": true}
+        ]
+      },
+      {
+        "name": "OccupationMaster",
+        "columns": [
+          {"name": "OccupationID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "OccupationName", "type": "VARCHAR", "length": 100, "mandatory": true}
+        ]
+      },
+      {
+        "name": "CaseMaster",
+        "columns": [
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CrimeNo", "type": "VARCHAR", "length": 50, "mandatory": true, "unique": true},
+          {"name": "CaseNo", "type": "VARCHAR", "length": 50, "mandatory": true},
+          {"name": "CrimeRegisteredDate", "type": "DATE", "mandatory": true},
+          {"name": "PolicePersonID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Employee", "foreign_key_column": "EmployeeID"},
+          {"name": "PoliceStationID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Unit", "foreign_key_column": "UnitID"},
+          {"name": "CaseCategoryID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseCategory", "foreign_key_column": "CaseCategoryID"},
+          {"name": "GravityOffenceID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "GravityOffence", "foreign_key_column": "GravityOffenceID"},
+          {"name": "CrimeMajorHeadID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CrimeHead", "foreign_key_column": "CrimeHeadID"},
+          {"name": "CrimeMinorHeadID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CrimeSubHead", "foreign_key_column": "CrimeSubHeadID"},
+          {"name": "CaseStatusID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseStatusMaster", "foreign_key_column": "CaseStatusID"},
+          {"name": "CourtID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Court", "foreign_key_column": "CourtID"}
+        ]
+      },
+      {
+        "name": "Inv_OccuranceTime",
+        "columns": [
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "unique": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "IncidentFromDate", "type": "DATETIME", "mandatory": false},
+          {"name": "IncidentToDate", "type": "DATETIME", "mandatory": false},
+          {"name": "InfoReceivedPSDate", "type": "DATETIME", "mandatory": false},
+          {"name": "latitude", "type": "DOUBLE", "mandatory": false},
+          {"name": "longitude", "type": "DOUBLE", "mandatory": false},
+          {"name": "BriefFacts", "type": "VARCHAR", "length": 2000, "mandatory": false}
+        ]
+      },
+      {
+        "name": "ComplainantDetails",
+        "columns": [
+          {"name": "ComplainantID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "ComplainantName", "type": "VARCHAR", "length": 150, "mandatory": true},
+          {"name": "AgeYear", "type": "BIGINT", "mandatory": false},
+          {"name": "OccupationID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "OccupationMaster", "foreign_key_column": "OccupationID"},
+          {"name": "ReligionID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "ReligionMaster", "foreign_key_column": "ReligionID"},
+          {"name": "CasteID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CasteMaster", "foreign_key_column": "caste_master_id"},
+          {"name": "GenderID", "type": "BIGINT", "mandatory": false}
+        ]
+      },
+      {
+        "name": "Act",
+        "columns": [
+          {"name": "ActCode", "type": "VARCHAR", "length": 50, "mandatory": true, "unique": true},
+          {"name": "ActDescription", "type": "VARCHAR", "length": 200, "mandatory": true},
+          {"name": "ShortName", "type": "VARCHAR", "length": 100, "mandatory": false},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "Section",
+        "columns": [
+          {"name": "ActCode", "type": "VARCHAR", "length": 50, "mandatory": true, "foreign_key_table": "Act", "foreign_key_column": "ActCode"},
+          {"name": "SectionCode", "type": "VARCHAR", "length": 50, "mandatory": true},
+          {"name": "SectionDescription", "type": "VARCHAR", "length": 300, "mandatory": true},
+          {"name": "Active", "type": "BOOLEAN", "default": true}
+        ]
+      },
+      {
+        "name": "ActSectionAssociation",
+        "columns": [
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "ActID", "type": "VARCHAR", "length": 50, "mandatory": true, "foreign_key_table": "Act", "foreign_key_column": "ActCode"},
+          {"name": "SectionID", "type": "VARCHAR", "length": 50, "mandatory": true},
+          {"name": "ActOrderID", "type": "BIGINT", "mandatory": false},
+          {"name": "SectionOrderID", "type": "BIGINT", "mandatory": false}
+        ]
+      },
+      {
+        "name": "Victim",
+        "columns": [
+          {"name": "VictimMasterID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "VictimName", "type": "VARCHAR", "length": 150, "mandatory": true},
+          {"name": "AgeYear", "type": "BIGINT", "mandatory": false},
+          {"name": "GenderID", "type": "BIGINT", "mandatory": false},
+          {"name": "VictimPolice", "type": "VARCHAR", "length": 10, "mandatory": false}
+        ]
+      },
+      {
+        "name": "Accused",
+        "columns": [
+          {"name": "AccusedMasterID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "AccusedName", "type": "VARCHAR", "length": 150, "mandatory": true},
+          {"name": "AgeYear", "type": "BIGINT", "mandatory": false},
+          {"name": "GenderID", "type": "BIGINT", "mandatory": false},
+          {"name": "PersonID", "type": "VARCHAR", "length": 50, "mandatory": false}
+        ]
+      },
+      {
+        "name": "ArrestSurrender",
+        "columns": [
+          {"name": "ArrestSurrenderID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "ArrestSurrenderTypeID", "type": "BIGINT", "mandatory": false},
+          {"name": "ArrestSurrenderDate", "type": "DATE", "mandatory": false},
+          {"name": "ArrestSurrenderStateId", "type": "BIGINT", "mandatory": false, "foreign_key_table": "State", "foreign_key_column": "StateID"},
+          {"name": "ArrestSurrenderDistrictId", "type": "BIGINT", "mandatory": false, "foreign_key_table": "District", "foreign_key_column": "DistrictID"},
+          {"name": "PoliceStationID", "type": "BIGINT", "mandatory": false, "foreign_key_table": "Unit", "foreign_key_column": "UnitID"},
+          {"name": "IOID", "type": "BIGINT", "mandatory": false, "foreign_key_table": "Employee", "foreign_key_column": "EmployeeID"},
+          {"name": "CourtID", "type": "BIGINT", "mandatory": false, "foreign_key_table": "Court", "foreign_key_column": "CourtID"},
+          {"name": "AccusedMasterID", "type": "BIGINT", "mandatory": false, "foreign_key_table": "Accused", "foreign_key_column": "AccusedMasterID"},
+          {"name": "IsAccused", "type": "BOOLEAN", "default": true},
+          {"name": "IsComplainantAccused", "type": "BOOLEAN", "default": false}
+        ]
+      },
+      {
+        "name": "inv_arrestsurrenderaccused",
+        "columns": [
+          {"name": "ArrestSurrenderID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "ArrestSurrender", "foreign_key_column": "ArrestSurrenderID"},
+          {"name": "AccusedMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Accused", "foreign_key_column": "AccusedMasterID"}
+        ]
+      },
+      {
+        "name": "CrimeHeadActSection",
+        "columns": [
+          {"name": "CrimeHeadID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CrimeHead", "foreign_key_column": "CrimeHeadID"},
+          {"name": "ActCode", "type": "VARCHAR", "length": 50, "mandatory": true, "foreign_key_table": "Act", "foreign_key_column": "ActCode"},
+          {"name": "SectionCode", "type": "VARCHAR", "length": 50, "mandatory": true}
+        ]
+      },
+      {
+        "name": "ChargesheetDetails",
+        "columns": [
+          {"name": "CSID", "type": "BIGINT", "mandatory": true, "unique": true},
+          {"name": "CaseMasterID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "CaseMaster", "foreign_key_column": "CaseMasterID"},
+          {"name": "csdate", "type": "DATETIME", "mandatory": true},
+          {"name": "cstype", "type": "VARCHAR", "length": 1, "mandatory": true},
+          {"name": "PolicePersonID", "type": "BIGINT", "mandatory": true, "foreign_key_table": "Employee", "foreign_key_column": "EmployeeID"}
+        ]
+      }
+    ]
+  }
+}

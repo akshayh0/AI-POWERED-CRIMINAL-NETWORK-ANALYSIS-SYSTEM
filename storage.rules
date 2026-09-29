@@ -1,0 +1,13 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /profile_photos/{photoId} {
+      // Authenticated users can upload their profile photo
+      allow create, update: if request.auth != null && request.resource.size < 5 * 1024 * 1024;
+      // All authenticated officers and admins can view profile photos
+      allow read: if request.auth != null;
+      // Only authenticated users can delete their photos
+      allow delete: if request.auth != null;
+    }
+  }
+}

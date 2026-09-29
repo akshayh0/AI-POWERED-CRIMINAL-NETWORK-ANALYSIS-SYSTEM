@@ -1,0 +1,591 @@
+@import "tailwindcss";
+
+@theme {
+  --color-police-bg: #F5F7FB;
+  --color-police-card: #FFFFFF;
+  --color-police-border: #E2E8F0;
+  --color-police-accent: #2563EB;
+  --color-police-blue: #2563EB;
+  --color-police-orange: #f97316;
+  --color-police-yellow: #eab308;
+  --color-police-success: #10b981;
+  --color-police-danger: #ef4444;
+  --color-police-muted: #64748B;
+  
+  --backdrop-blur-xs: 2px;
+}
+
+@layer base {
+  body {
+    background-color: #F5F7FB !important;
+    color: #0F172A;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* ========================================================
+   ANIMATED NETWORK BACKGROUND LAYER
+   ======================================================== */
+#ambient-network-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  background-color: transparent !important;
+}
+
+.bg-police-bg {
+  background-color: transparent !important;
+}
+
+/* ========================================================
+   CARDS & PANELS: #FFFFFF
+   ======================================================== */
+.glass-card {
+  background: #FFFFFF !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.04) !important;
+  border-radius: 0.75rem;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.07), 0 8px 10px -6px rgba(37, 99, 235, 0.04) !important;
+  transform: translateY(-2px);
+}
+
+/* Sidebar & Header */
+.w-64.h-screen,
+[class*="bg-[#0a0d14]"] {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+}
+
+header,
+[class*="bg-[#0a0d14]/80"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 1px 2px 0 rgba(15, 23, 42, 0.03) !important;
+}
+
+/* Dropdown menus */
+.absolute.bg-slate-900,
+div[class*="shadow-2xl"].bg-slate-900 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05) !important;
+}
+
+/* ========================================================
+   SECONDARY PANELS: #F8FAFC
+   ======================================================== */
+.bg-slate-900,
+.bg-slate-900\/60,
+.bg-slate-900\/50,
+.bg-slate-900\/40,
+.bg-slate-900\/30,
+.bg-slate-950,
+.bg-slate-950\/60,
+.bg-slate-950\/70,
+.bg-slate-950\/80,
+.bg-slate-950\/90,
+.bg-slate-800,
+.bg-black\/20,
+.bg-black\/30,
+[class*="bg-slate-950"],
+[class*="bg-slate-900"] {
+  background-color: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Reset / Secondary action buttons */
+button.bg-slate-900 {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #0F172A !important;
+}
+button.bg-slate-900:hover {
+  background-color: #F8FAFC !important;
+}
+
+/* ========================================================
+   BORDERS: #E2E8F0
+   ======================================================== */
+.border-white\/10,
+.border-white\/5,
+.border-white\/15,
+.border-white\/20,
+.border-slate-800,
+.border-slate-700 {
+  border-color: #E2E8F0 !important;
+}
+
+[class*="divide-white"] > * + * {
+  border-color: #E2E8F0 !important;
+}
+
+/* ========================================================
+   PRIMARY TEXT: #0F172A
+   ======================================================== */
+.text-white,
+p.text-white,
+span.text-white,
+div.text-white,
+strong,
+strong.text-white,
+b,
+b.text-white,
+h1, h2, h3, h4, h5, h6,
+h1.text-white,
+h2.text-white,
+h3.text-white,
+h4.text-white,
+h5.text-white,
+h6.text-white,
+td.text-white,
+th.text-white,
+a.text-white,
+label.text-white,
+input.text-white,
+select.text-white,
+textarea.text-white,
+.font-heading,
+.text-slate-100,
+.text-slate-200 {
+  color: #0F172A !important;
+}
+
+/* User chat bubble */
+div[class*="bg-blue-600\/10"],
+div[class*="bg-blue-600\/10"] * {
+  color: #0F172A !important;
+}
+
+/* Preserve pure white text ONLY on solid filled action buttons */
+button.bg-orange-500,
+button.bg-orange-600,
+button.bg-blue-600,
+button.bg-rose-600,
+button.bg-emerald-600,
+button.bg-orange-500 *,
+button.bg-orange-600 *,
+button.bg-blue-600 *,
+button.bg-rose-600 *,
+button.bg-emerald-600 * {
+  color: #FFFFFF !important;
+}
+
+/* ========================================================
+   SECONDARY TEXT: #64748B
+   ======================================================== */
+.text-slate-300,
+.text-slate-400,
+.text-slate-500,
+.text-gray-400,
+.text-gray-500 {
+  color: #64748B !important;
+}
+
+/* ========================================================
+   PRIMARY ACCENT: #2563EB
+   ======================================================== */
+.text-blue-400,
+.text-blue-500,
+.text-sky-500 {
+  color: #2563EB !important;
+}
+
+.bg-blue-600\/20,
+.bg-blue-600\/15,
+.bg-blue-500\/10 {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  color: #2563EB !important;
+  border-color: rgba(37, 99, 235, 0.25) !important;
+}
+
+.border-blue-500\/30,
+.border-blue-500\/20,
+.border-blue-500\/50 {
+  border-color: rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Hover effects */
+.hover\:bg-white\/5:hover {
+  background-color: #F1F5F9 !important;
+}
+
+.hover\:text-white:hover {
+  color: #0F172A !important;
+}
+
+.hover\:text-blue-400:hover {
+  color: #2563EB !important;
+}
+
+/* ========================================================
+   FORM CONTROLS & INPUTS
+   ======================================================== */
+input, select, textarea {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  color: #0F172A !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #2563EB !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #2563EB !important;
+}
+
+/* ========================================================
+   TABLES
+   ======================================================== */
+table thead tr {
+  background-color: #F8FAFC !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+}
+
+table thead th {
+  color: #64748B !important;
+}
+
+table tbody tr:hover,
+tr.hover\:bg-white\/5:hover {
+  background-color: #F8FAFC !important;
+}
+
+/* General status pill defaults */
+span.bg-slate-800,
+span.bg-slate-900 {
+  background-color: #F1F5F9 !important;
+  color: #475569 !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+/* ========================================================
+   KEEP ENTITY COLORS (Accused, Victim, Officer, Case, Court, District/Station)
+   ======================================================== */
+/* 1. Accused: Red/Pink */
+.bg-rose-500\/10,
+.bg-rose-500\/15 {
+  background-color: #FFE4E6 !important;
+  color: #E11D48 !important;
+  border-color: #FDA4AF !important;
+}
+.text-rose-400,
+.text-rose-500 {
+  color: #E11D48 !important;
+}
+.border-rose-500\/20,
+.border-rose-500\/30 {
+  border-color: #FDA4AF !important;
+}
+
+/* 2. Victim: Green */
+.bg-emerald-500\/10,
+.bg-emerald-500\/15 {
+  background-color: #D1FAE5 !important;
+  color: #059669 !important;
+  border-color: #6EE7B7 !important;
+}
+.text-emerald-400,
+.text-emerald-500 {
+  color: #059669 !important;
+}
+.border-emerald-500\/20,
+.border-emerald-500\/30 {
+  border-color: #6EE7B7 !important;
+}
+
+/* 3. Officer: Blue */
+.bg-blue-500\/10,
+.bg-blue-500\/15 {
+  background-color: #DBEAFE !important;
+  color: #2563EB !important;
+  border-color: #93C5FD !important;
+}
+
+/* 4. Case: Cyan */
+.bg-cyan-500\/10,
+.bg-cyan-500\/15,
+.bg-teal-500\/10 {
+  background-color: #CFFAFE !important;
+  color: #0891B2 !important;
+  border-color: #67E8F9 !important;
+}
+.text-cyan-400,
+.text-teal-400 {
+  color: #0891B2 !important;
+}
+
+/* 5. Court: Orange */
+.bg-orange-500\/10,
+.bg-orange-500\/15,
+.bg-orange-500\/20,
+.bg-amber-500\/10,
+.bg-amber-500\/15,
+.bg-amber-500\/20 {
+  background-color: #FEF3C7 !important;
+  color: #D97706 !important;
+  border-color: #FCD34D !important;
+}
+.text-orange-400,
+.text-orange-500,
+.text-amber-400,
+.text-amber-500 {
+  color: #D97706 !important;
+}
+.border-orange-500\/20,
+.border-orange-500\/30,
+.border-amber-500\/20 {
+  border-color: #FCD34D !important;
+}
+
+/* 6. District/Station: Purple */
+.bg-purple-500\/10,
+.bg-purple-500\/15,
+.bg-violet-500\/10,
+.bg-violet-500\/15,
+.bg-indigo-500\/10 {
+  background-color: #F3E8FF !important;
+  color: #7C3AED !important;
+  border-color: #D8B4FE !important;
+}
+.text-purple-400,
+.text-violet-400,
+.text-indigo-400 {
+  color: #7C3AED !important;
+}
+.border-purple-500\/20,
+.border-violet-500\/20 {
+  border-color: #D8B4FE !important;
+}
+
+/* ========================================================
+   CRIMINAL NETWORK GRAPH LIGHT THEME
+   ======================================================== */
+.react-flow__pane {
+  background-color: #F8FAFC !important;
+}
+
+.react-flow__controls {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.06) !important;
+  border-radius: 0.5rem;
+}
+
+.react-flow__controls-button {
+  background: #FFFFFF !important;
+  border-bottom: 1px solid #E2E8F0 !important;
+  fill: #0F172A !important;
+}
+
+.react-flow__controls-button:hover {
+  background: #F1F5F9 !important;
+}
+
+.react-flow__minimap {
+  background: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 0.5rem;
+}
+
+.react-flow__edge-path {
+  stroke: #94A3B8 !important;
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke: #2563EB !important;
+}
+
+/* Custom Node Styles in Light Theme */
+.react-flow__node p.text-white {
+  color: #0F172A !important;
+}
+
+.react-flow__node p.text-slate-500 {
+  color: #64748B !important;
+}
+
+.react-flow__node .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+/* Entity Node Backgrounds in ReactFlow */
+.bg-rose-950\/80 { background-color: #FFF1F2 !important; border-color: #FDA4AF !important; }
+.bg-emerald-950\/80 { background-color: #ECFDF5 !important; border-color: #6EE7B7 !important; }
+.bg-blue-950\/80 { background-color: #EFF6FF !important; border-color: #93C5FD !important; }
+.bg-indigo-950\/80 { background-color: #EEF2FF !important; border-color: #C7D2FE !important; }
+.bg-amber-950\/80 { background-color: #FFFBEB !important; border-color: #FDE68A !important; }
+.bg-purple-950\/80 { background-color: #FAF5FF !important; border-color: #E9D5FF !important; }
+.bg-cyan-950\/80 { background-color: #ECFEFF !important; border-color: #A5F3FC !important; }
+.bg-teal-950\/80 { background-color: #F0FDFA !important; border-color: #99F6E4 !important; }
+
+/* ========================================================
+   RECHARTS CHARTS & TOOLTIPS
+   ======================================================== */
+.recharts-default-tooltip {
+  background-color: #FFFFFF !important;
+  border: 1px solid #E2E8F0 !important;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04) !important;
+  border-radius: 8px !important;
+}
+
+.recharts-tooltip-item, 
+.recharts-tooltip-label {
+  color: #0F172A !important;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: #64748B !important;
+}
+
+.recharts-cartesian-grid line {
+  stroke: #E2E8F0 !important;
+}
+
+/* ========================================================
+   LEAFLET LIGHT CARTOGRAPHY
+   ======================================================== */
+.leaflet-container {
+  background: #F8FAFC !important;
+  border-radius: 0.75rem;
+  border: 1px solid #E2E8F0 !important;
+  position: relative !important;
+  z-index: 0 !important;
+  isolation: isolate !important;
+}
+
+.leaflet-tile {
+  filter: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #FFFFFF !important;
+  color: #0F172A !important;
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 0.5rem !important;
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.08) !important;
+}
+
+.leaflet-popup-tip {
+  background: #FFFFFF !important;
+}
+
+/* ========================================================
+   CHAT / PROSE LIGHT THEME
+   ======================================================== */
+.prose,
+.prose-invert,
+.prose-invert p,
+.prose-invert span,
+.prose-invert div,
+.prose-invert li,
+.prose-invert code {
+  color: #1E293B !important;
+}
+
+.prose-invert strong,
+.prose-invert b,
+.prose-invert h1,
+.prose-invert h2,
+.prose-invert h3,
+.prose-invert h4 {
+  color: #0F172A !important;
+  font-weight: 700 !important;
+}
+
+/* Custom light scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F7FB;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2563EB;
+}
+
+/* Subtle glow effects */
+.cyber-glow {
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.12);
+}
+
+.cyber-glow-orange {
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.15);
+}
+
+/* ========================================================
+   INDIAN GOVERNMENT / POLICE PORTAL DESKTOP HEADER STYLING
+   ======================================================== */
+.gov-topbar {
+  background-color: #091a33 !important;
+  color: #F8FAFC !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.gov-topbar span.text-white,
+.gov-topbar div.text-white,
+.gov-topbar p.text-white {
+  color: #FFFFFF !important;
+}
+
+.gov-topbar .text-amber-400 {
+  color: #FBBF24 !important;
+}
+
+.gov-topbar .text-slate-400 {
+  color: #94A3B8 !important;
+}
+
+.gov-topbar .text-slate-300 {
+  color: #CBD5E1 !important;
+}
+
+.gov-topbar .text-slate-200 {
+  color: #E2E8F0 !important;
+}
+
+.gov-topbar button {
+  color: #CBD5E1 !important;
+}
+
+.gov-topbar button:hover {
+  color: #FFFFFF !important;
+}
+
+.gov-topbar button.text-rose-300 {
+  color: #FDA4AF !important;
+}
+
+.gov-topbar button.text-rose-300:hover {
+  color: #FFE4E6 !important;
+}
+

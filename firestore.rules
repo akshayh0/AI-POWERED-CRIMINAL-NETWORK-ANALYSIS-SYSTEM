@@ -1,0 +1,78 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'akom@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'Administrator'))
+      );
+    }
+
+    function isApproved() {
+      return isAuthenticated() && (
+        request.auth.token.email == 'akom@gmail.com' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == 'approved')
+      );
+    }
+
+    // Users Collection
+    match /users/{userId} {
+      // Users can read their own profile; Administrators can read all users
+      allow read: if isOwner(userId) || isAdmin();
+
+      // Newly registered users can create their own document with pending status
+      // Normal users cannot self-assign administrator role
+      allow create: if isOwner(userId) && (
+        (request.auth.token.email == 'akom@gmail.com' && 
+         (request.resource.data.role == 'admin' || request.resource.data.role == 'Administrator') && 
+         request.resource.data.status == 'approved') ||
+        (request.resource.data.status == 'pending' && 
+         request.resource.data.role != 'admin' &&
+         request.resource.data.role != 'Administrator' &&
+         request.resource.data.requestedRole != 'admin' &&
+         request.resource.data.requestedRole != 'Administrator')
+      );
+
+      // Only administrators can change role, status, approvedAt, approvedBy
+      // Normal users can only update personal contact fields (e.g. phone, profilePhotoUrl)
+      allow update: if isAdmin() || (
+        isOwner(userId) &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny([
+          'role', 
+          'status', 
+          'approvedAt', 
+          'approvedBy', 
+          'requestedRole'
+        ])
+      );
+
+      // Only administrators can delete records
+      allow delete: if isAdmin();
+    }
+
+    // Audit Logs Collection
+    match /audit_logs/{logId} {
+      // System and authenticated users can append audit logs
+      allow create: if isAuthenticated();
+
+      // Only administrators can read the audit trail
+      allow read: if isAdmin();
+
+      // Audit logs are tamper-proof and immutable
+      allow update, delete: if false;
+    }
+  }
+}
