@@ -207,4 +207,4 @@ Set the backend API URL in the frontend environment file (for example `VITE_API_
 
 ---
 
-> ⚠️ Academic project. AI-generated insights are decision-support aids and must not replace investigator judgment.
+> ⚠️ Cap Stone project. AI-generated insights are decision-support aids and must not replace investigator judgment.
