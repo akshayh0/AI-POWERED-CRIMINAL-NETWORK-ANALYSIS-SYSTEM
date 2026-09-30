@@ -1,145 +1,210 @@
-#  Karnataka State Police - AI-Driven Crime Analytics & Intelligence Platform
+# 🛡️ AI-Powered Criminal Network Analysis System
 
-An enterprise-grade Crime Intelligence System featuring interactive dashboards, crime hotspot mapping, criminal network graph visualizations, statistical trend forecasts, anomaly detection, and an AI investigation assistant.
-
----
-
-## 🏛 Architecture Overview
-
-```
-                      +-----------------------------+
-                      |       Netlify Edge          |
-                      |   (React 19 + TypeScript)   |
-                      +--------------+--------------+
-                                     |
-                                     | HTTPS API Calls (VITE_API_URL)
-                                     v
-                      +-----------------------------+
-                      |       Render Backend        |
-                      |      (Python / Flask)       |
-                      +--------------+--------------+
-                                     |
-                                     | Queries & Analytics
-                                     v
-                      +-----------------------------+
-                      |    crime_intelligence.db    |
-                      |          (SQLite)           |
-                      +-----------------------------+
-```
-
-- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, Leaflet, Recharts, React Flow (Hosted on **Netlify**).
-- **Backend**: Python 3.11+, Flask, Flask-CORS, Gunicorn, Scikit-Learn/Pure-Python analytics (Hosted on **Render**).
-- **Database**: Bundled SQLite database (`crime_intelligence.db`) with 120+ pre-populated FIRs, suspects, victims, chargesheets, and unit hierarchies.
+A web-based crime intelligence platform (**KSP AI-Portal**) that helps analyze criminal cases, accused persons, victims, officers, districts, police stations, and the relationships between criminal entities.
 
 ---
 
-## 🚀 Local Development
+## 📌 Problem Statement
 
-### 1. Backend Setup
+- Crime information is fragmented
+- Hard to find links between cases and criminals
+- Trends and hotspots are hard to discover
+- Manual analysis is slow and time-consuming
+- No centralized intelligent analysis
+
+## ✅ Solution
+
+- Centralized PostgreSQL crime database
+- Criminal network analysis of relationships
+- Trend, hotspot and anomaly analysis
+- Fast web dashboard with live KPIs
+- AI-assisted insights and chat (Groq API)
+
+---
+
+## ✨ Modules
+
+| Analytics & Records | AI Intelligence |
+|---|---|
+| Dashboard / KPI analytics | AI predictions |
+| Case management | Crime hotspots |
+| Accused analysis | Anomaly detection |
+| Victim analysis | Similar case analysis |
+| Officer analysis | Criminal network analysis |
+| District / station analysis | AI chat |
+
+---
+
+## 🏗️ System Architecture
+
+```
+User → React Frontend → REST API → Flask Backend → PostgreSQL (Render)
+                                        │
+                                        └──► Groq AI Service
+```
+
+| Layer | Role |
+|---|---|
+| React Frontend | Dashboards, tables, network graph, chat UI |
+| REST API | JSON over HTTP between frontend and backend |
+| Flask Backend | Business logic, database queries, AI requests |
+| PostgreSQL | Stores FIRs, accused, victims, stations |
+| Groq API | AI-powered analysis and chat |
+
+---
+
+## 🧰 Tech Stack
+
+| Category | Technologies |
+|---|---|
+| Frontend | React, TypeScript, Vite |
+| Backend | Python, Flask, Flask-CORS, Gunicorn |
+| Database | PostgreSQL |
+| AI | Groq API |
+| Deployment | Vercel (frontend & backend), Render (PostgreSQL database) |
+
+---
+
+## 🕸️ Criminal Network Analysis
+
+Relationships are shown as a graph of connected entities:
+
+```
+Accused → Case → Victim
+Accused → Associated Case
+Case → District
+Case → Police Station
+```
+
+Investigators can follow links from an accused to related cases, people, and locations.
+
+---
+
+## 📊 Current Database Statistics
+
+Verified through the deployed API (`GET /api/cases/kpis`):
+
+| Metric | Count |
+|---|---|
+| Total FIRs | 120 |
+| Solved cases | 110 (Closed 59 + Charge-sheeted 51) |
+| Pending cases | 10 |
+| Total accused | 79 |
+| Total victims | 120 |
+| Districts | 7 |
+| Police stations | 29 |
+| Today's FIRs | 1 |
+
+### Example API
+
+```http
+GET /api/cases/kpis
+```
+
+```json
+{
+  "charge_sheeted": 51,
+  "closed_cases": 59,
+  "pending_cases": 10,
+  "solved_cases": 110,
+  "today_firs": 1,
+  "total_accused": 79,
+  "total_districts": 7,
+  "total_firs": 120,
+  "total_stations": 29,
+  "total_victims": 120
+}
+```
+
+---
+
+## 🚀 Deployment & Verification
+
+- Frontend deployed on **Vercel**
+- Backend deployed on **Vercel**
+- PostgreSQL database hosted on **Render**
+- Database connection verified
+- API response verified with HTTP 200
+- CORS verified
+- Frontend/backend integration verified
+- Production dashboard displays database data
+
+---
+
+## 🖼️ Screenshots
+
+Add your screenshots to a `docs/screenshots/` folder and update the file names below.
+
+| Login | Command Center |
+|---|---|
+| ![Login](docs/screenshots/login.png) | ![Dashboard](docs/screenshots/dashboard.png) |
+
+| Criminal Linkage Network | AI Intelligence Modules |
+|---|---|
+| ![Network](docs/screenshots/network.png) | ![AI](docs/screenshots/ai-modules.png) |
+
+| Crime Map | Officer Registry |
+|---|---|
+| ![Map](docs/screenshots/map.png) | ![Officers](docs/screenshots/officers.png) |
+
+---
+
+## ⚙️ Local Setup
+
+> Adjust folder names and environment variable names below to match your repository.
+
+### Backend
 
 ```bash
 cd backend
-
-# Create and activate virtual environment
-python -m venv .venv
-# On Windows:
-.venv\Scripts\activate
-# On Linux/macOS:
-source .venv/bin/activate
-
-# Install dependencies
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-
-# Start backend server (runs on port 5000)
-python main.py
 ```
 
-The backend health check is available at: `http://localhost:5000/api/health`
+Create a `.env` file (example names, use the ones your code reads):
 
-### 2. Frontend Setup
+```env
+DATABASE_URL=your_postgresql_connection_string
+GROQ_API_KEY=your_groq_api_key
+```
+
+```bash
+flask run                       # development
+gunicorn app:app                # production (change "app:app" to your entry point)
+```
+
+### Frontend
 
 ```bash
 cd frontend
-
-# Install Node dependencies
 npm install
-
-# Start Vite dev server (runs on port 5173)
 npm run dev
 ```
 
-Open `http://localhost:5173/app/` in your browser.
+Set the backend API URL in the frontend environment file (for example `VITE_API_URL`).
 
 ---
 
-## 🌐 Production Deployment
+## 🔮 Future Scope
 
-### Backend -> Render
-
-1. Create a new **Web Service** on [Render](https://render.com).
-2. Connect your GitHub repository.
-3. Configure the following service settings:
-   - **Root Directory**: `backend`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn main:app`
-4. Add Environment Variables:
-   - `PORT`: `10000` (Render will override automatically with assigned port)
-   - `FRONTEND_URL`: `https://YOUR-SITE-NAME.netlify.app`
-   - `DATABASE_PATH`: `crime_intelligence.db`
-
-### Frontend -> Netlify
-
-1. Create a new **Site** on [Netlify](https://netlify.app).
-2. Connect your GitHub repository.
-3. Configure the build settings (or let `netlify.toml` configure it automatically):
-   - **Base directory**: `frontend`
-   - **Build command**: `npm run build`
-   - **Publish directory**: `dist`
-4. Add Environment Variables:
-   - `VITE_API_URL`: `https://YOUR-RENDER-BACKEND.onrender.com`
+- More advanced graph / network algorithms
+- Improved predictive analytics
+- Real-time police data integration
+- More advanced anomaly detection
+- Role-based access control enhancements
+- Mobile application
+- More sophisticated AI models
 
 ---
 
-## 📡 API Endpoints Summary
+## 👥 Team
 
-All routes are accessible both with and without the `/api` prefix.
-
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/health` | Health and status check |
-| `GET` | `/api/cases` | Paginated case records with filters (`district_id`, `station_id`, `search`, etc.) |
-| `GET` | `/api/cases/<id>` | Full detail of a case including occurrence, victims, accused, and acts |
-| `GET` | `/api/cases/kpis` | Executive KPI summary (Total FIRs, solved count, active suspects, etc.) |
-| `GET` | `/api/cases/trends` | Monthly and yearly crime trend aggregation |
-| `GET` | `/api/cases/districts` | Crime count by district |
-| `GET` | `/api/cases/stations` | Crime count by police station |
-| `GET` | `/api/cases/categories` | Crime classification distribution |
-| `GET` | `/api/cases/demographics` | Demographic breakdown (gender, age groups, religion, caste) |
-| `GET` | `/api/cases/officers` | Officer case load and resolution stats |
-| `GET` | `/api/cases/accused` | Accused profiles with repeat-offender risk scores |
-| `GET` | `/api/cases/accused/<person_id>` | Detailed profile and case history of a specific accused |
-| `GET` | `/api/cases/victims` | Victim profiles and demographics |
-| `GET` | `/api/ai/hotspots` | Spatial cluster analysis for geographic crime hotspots |
-| `GET` | `/api/ai/forecast` | 6-month statistical crime trend forecast with confidence bounds |
-| `GET` | `/api/ai/districts-risk` | District-level threat posture and patrol recommendations |
-| `GET` | `/api/ai/anomalies` | Multivariate anomaly detection on case timeline and gravity |
-| `GET` | `/api/ai/similar-cases/<id>` | Cosine similarity fact-matching for Modus Operandi |
-| `GET` | `/api/ai/network` | Node-link graph topology for cases, accused, stations, and accomplices |
-| `POST` | `/api/ai/chat` | Natural language intelligence assistant for case queries |
-| `POST` | `/api/upload` | Evidence media upload endpoint |
-| `POST` | `/api/ocr` | Optical character recognition text extraction |
-| `POST` | `/api/vision/face-recognize` | Facial comparison verification |
-| `POST` | `/api/vision/object-detect` | Evidence object detection |
-| `POST` | `/api/predict` | Crime volume and repeat risk prediction |
-| `POST` | `/api/reports/generate` | Intelligence report compilation |
+| Name | Role |
+|---|---|
+| Akshay H | Team TRAILBLAZERS |
+| Omkar K S | Team TRAILBLAZERS |
 
 ---
 
-## 🔒 Security & Git Hygiene
-
-- `.env` files and virtual environments are excluded via `.gitignore`.
-- Reference configuration templates provided:
-  - `backend/.env.example`
-  - `frontend/.env.example`
-- Zero hardcoded local machine paths or secrets.
+> ⚠️ Academic project. AI-generated insights are decision-support aids and must not replace investigator judgment.
