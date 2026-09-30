@@ -1,4 +1,4 @@
-# Karnataka State Police - AI-Driven Crime Analytics & Intelligence Platform
+#  Karnataka State Police - AI-Driven Crime Analytics & Intelligence Platform
 
 An enterprise-grade Crime Intelligence System featuring interactive dashboards, crime hotspot mapping, criminal network graph visualizations, statistical trend forecasts, anomaly detection, and an AI investigation assistant.
 
