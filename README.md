@@ -4,7 +4,7 @@ An AI-powered web platform designed to help analyze crime records, identify rela
 
 ## 🔗 Project Links
 
-- 🌐 **Live Application:** https://ai-powered-criminal-network-frontend.vercel.app/
+- 🌐 **Live Application:** [https://ai-powered-criminal-network-frontend.vercel.app/](https://ai-powered-criminal-network-fronten.vercel.app/)
 - 💻 **GitHub Repository:** https://github.com/akshayh0/AI-POWERED-CRIMINAL-NETWORK-ANALYSIS-SYSTEM
 - 📄 **Project Report:** `documents/AI_Criminal_Network_Analysis_Report.pdf`
 - 📊 **Seminar PPT:** `documents/AI_Criminal_Network_Analysis_Seminar.pptx`
