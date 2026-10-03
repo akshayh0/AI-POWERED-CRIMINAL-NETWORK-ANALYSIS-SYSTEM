@@ -1,210 +1,570 @@
-# 🛡️ AI-Powered Criminal Network Analysis System
+# AI-Powered Criminal Network Analysis System
 
-A web-based crime intelligence platform (**KSP AI-Portal**) that helps analyze criminal cases, accused persons, victims, officers, districts, police stations, and the relationships between criminal entities.
+An AI-powered web platform designed to help analyze crime records, identify relationships between criminals and cases, visualize crime patterns, and generate intelligent insights from centralized crime data.
 
----
+## 🔗 Project Links
 
-## 📌 Problem Statement
+- 🌐 **Live Application:** https://ai-powered-criminal-network-frontend.vercel.app/
+- 💻 **GitHub Repository:** https://github.com/akshayh0/AI-POWERED-CRIMINAL-NETWORK-ANALYSIS-SYSTEM
+- 📄 **Project Report:** `documents/AI_Criminal_Network_Analysis_Report.pdf`
+- 📊 **Seminar PPT:** `documents/AI_Criminal_Network_Analysis_Seminar.pptx`
 
-- Crime information is fragmented
-- Hard to find links between cases and criminals
-- Trends and hotspots are hard to discover
-- Manual analysis is slow and time-consuming
-- No centralized intelligent analysis
+## 📌 Project Overview
 
-## ✅ Solution
+The AI-Powered Criminal Network Analysis System is a web-based crime intelligence platform that combines:
 
-- Centralized PostgreSQL crime database
-- Criminal network analysis of relationships
-- Trend, hotspot and anomaly analysis
-- Fast web dashboard with live KPIs
-- AI-assisted insights and chat (Groq API)
+- Crime data management
+- Criminal relationship analysis
+- Crime trend analysis
+- Hotspot identification
+- Anomaly detection
+- Similar case analysis
+- AI-powered crime intelligence
+- Interactive dashboards and visualizations
 
----
-
-## ✨ Modules
-
-| Analytics & Records | AI Intelligence |
-|---|---|
-| Dashboard / KPI analytics | AI predictions |
-| Case management | Crime hotspots |
-| Accused analysis | Anomaly detection |
-| Victim analysis | Similar case analysis |
-| Officer analysis | Criminal network analysis |
-| District / station analysis | AI chat |
+The system provides a centralized platform where authorized users can analyze crime-related information instead of relying on fragmented and manual analysis.
 
 ---
 
-## 🏗️ System Architecture
+## 🎯 Problem Statement
 
+Traditional crime analysis can involve fragmented data, manual investigation, and difficulty in identifying relationships between cases, accused persons, victims, districts, and police stations.
+
+This project aims to provide a centralized intelligent platform that makes crime data easier to access, analyze, visualize, and interpret.
+
+---
+
+## 💡 Proposed Solution
+
+The system provides a centralized web application connected to a PostgreSQL database and an AI-powered backend.
+
+It allows users to:
+
+1. View crime statistics and KPIs.
+2. Search and analyze crime cases.
+3. Analyze accused persons and victims.
+4. Explore relationships between cases and criminals.
+5. Identify crime trends and hotspots.
+6. Detect unusual crime patterns.
+7. Find similar cases.
+8. Generate AI-assisted insights using the Groq API.
+9. Interact with an AI crime intelligence assistant.
+
+---
+
+# 🏗️ System Architecture
+
+```text
+                    ┌─────────────────────┐
+                    │        User         │
+                    │ Officers / Analysts │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │   React Frontend    │
+                    │ Dashboard & Modules │
+                    └──────────┬──────────┘
+                               │
+                               │ REST API / JSON
+                               ▼
+                    ┌─────────────────────┐
+                    │   Flask Backend     │
+                    │ Business Logic & AI │
+                    └───────┬───────┬─────┘
+                            │       │
+                ┌───────────┘       └────────────┐
+                ▼                                ▼
+      ┌──────────────────┐             ┌─────────────────┐
+      │   PostgreSQL     │             │    Groq API     │
+      │   Crime Data     │             │  AI Analysis    │
+      └──────────────────┘             └─────────────────┘
+````
+
+---
+
+# 🛠️ Technology Stack
+
+## Frontend
+
+* React
+* TypeScript
+* Vite
+* HTML5
+* CSS3
+* JavaScript
+
+## Backend
+
+* Python
+* Flask
+* Flask-CORS
+* Gunicorn
+* REST APIs
+
+## Database
+
+* PostgreSQL
+
+## AI / Analytics
+
+* Groq API
+* AI-assisted analysis
+* Crime trend analysis
+* Hotspot analysis
+* Anomaly detection
+* Similar case analysis
+* Criminal network analysis
+
+## Authentication
+
+* Firebase Authentication
+
+## Deployment
+
+* Vercel — Frontend
+* Render — Backend / Database
+
+---
+
+# 🚀 Major Features
+
+### 📊 Dashboard & KPIs
+
+Provides an overview of important crime statistics including:
+
+* Total FIRs
+* Total accused
+* Total victims
+* Total districts
+* Total police stations
+* Solved cases
+* Pending cases
+* Closed cases
+* Charge-sheeted cases
+
+---
+
+### 📁 Case Management
+
+Users can access and analyze crime case information through a centralized interface.
+
+Features include:
+
+* Case records
+* Case details
+* Crime categories
+* District information
+* Police station information
+* Case statistics
+
+---
+
+### 👤 Accused Analysis
+
+Provides information about accused persons and their involvement in cases.
+
+The system can help identify:
+
+* Repeated involvement
+* Associated cases
+* Related victims
+* Case relationships
+
+---
+
+### 👥 Victim Analysis
+
+Provides centralized access to victim-related crime information and helps connect victims with relevant cases.
+
+---
+
+### 🕸️ Criminal Network Analysis
+
+The system represents relationships between:
+
+```text
+Accused
+   │
+   ├── Cases
+   │     ├── Victims
+   │     ├── District
+   │     └── Police Station
+   │
+   └── Associated Cases
 ```
-User → React Frontend → REST API → Flask Backend → PostgreSQL (Render)
-                                        │
-                                        └──► Groq AI Service
+
+This helps investigators understand connections and repeated involvement across cases.
+
+---
+
+### 📍 Crime Hotspot Analysis
+
+The system analyzes crime records based on locations and identifies areas with higher crime activity.
+
+---
+
+### 📈 Crime Trend Analysis
+
+The platform provides analytical views of crime patterns and trends to support investigation and decision-making.
+
+---
+
+### 🚨 Anomaly Detection
+
+The AI/analytics modules can identify unusual patterns in available crime data.
+
+---
+
+### 🔎 Similar Case Analysis
+
+The system provides functionality for finding cases that have similarities with a selected case.
+
+---
+
+### 🤖 AI Crime Intelligence Assistant
+
+The platform includes an AI-powered chat interface using the Groq API.
+
+Users can ask questions such as:
+
+* What are the most common crime categories?
+* Which locations have the highest crime counts?
+* What are the major crime trends?
+* Explain the crime statistics.
+* Analyze crime hotspots.
+* Find insights from available crime data.
+
+The AI assistant generates insights based on the available crime records.
+
+---
+
+# 🗄️ Database
+
+The project uses PostgreSQL as the centralized database.
+
+The database contains structured crime-related information such as:
+
+* FIR / Cases
+* Accused
+* Victims
+* Police Stations
+* Districts
+* Crime Categories
+* Officers
+* Case relationships
+
+The original SQLite database was migrated to PostgreSQL using a dedicated migration script.
+
+```text
+SQLite
+   │
+   │ Migration
+   ▼
+PostgreSQL
+   │
+   ▼
+Flask Backend
+   │
+   ▼
+React Frontend
 ```
 
-| Layer | Role |
-|---|---|
-| React Frontend | Dashboards, tables, network graph, chat UI |
-| REST API | JSON over HTTP between frontend and backend |
-| Flask Backend | Business logic, database queries, AI requests |
-| PostgreSQL | Stores FIRs, accused, victims, stations |
-| Groq API | AI-powered analysis and chat |
-
 ---
 
-## 🧰 Tech Stack
+# 🔄 Application Workflow
 
-| Category | Technologies |
-|---|---|
-| Frontend | React, TypeScript, Vite |
-| Backend | Python, Flask, Flask-CORS, Gunicorn |
-| Database | PostgreSQL |
-| AI | Groq API |
-| Deployment | Vercel (frontend & backend), Render (PostgreSQL database) |
-
----
-
-## 🕸️ Criminal Network Analysis
-
-Relationships are shown as a graph of connected entities:
-
-```
-Accused → Case → Victim
-Accused → Associated Case
-Case → District
-Case → Police Station
-```
-
-Investigators can follow links from an accused to related cases, people, and locations.
-
----
-
-## 📊 Current Database Statistics
-
-Verified through the deployed API (`GET /api/cases/kpis`):
-
-| Metric | Count |
-|---|---|
-| Total FIRs | 120 |
-| Solved cases | 110 (Closed 59 + Charge-sheeted 51) |
-| Pending cases | 10 |
-| Total accused | 79 |
-| Total victims | 120 |
-| Districts | 7 |
-| Police stations | 29 |
-| Today's FIRs | 1 |
-
-### Example API
-
-```http
-GET /api/cases/kpis
-```
-
-```json
-{
-  "charge_sheeted": 51,
-  "closed_cases": 59,
-  "pending_cases": 10,
-  "solved_cases": 110,
-  "today_firs": 1,
-  "total_accused": 79,
-  "total_districts": 7,
-  "total_firs": 120,
-  "total_stations": 29,
-  "total_victims": 120
-}
+```text
+User Login
+     ↓
+Dashboard
+     ↓
+Select Crime Intelligence Module
+     ↓
+Request Data / Analysis
+     ↓
+React Frontend
+     ↓
+REST API
+     ↓
+Flask Backend
+     ↓
+PostgreSQL Database
+     ↓
+AI / Analytics Processing
+     ↓
+Results & Visualizations
+     ↓
+User
 ```
 
 ---
 
-## 🚀 Deployment & Verification
+# 📂 Project Structure
 
-- Frontend deployed on **Vercel**
-- Backend deployed on **Vercel**
-- PostgreSQL database hosted on **Render**
-- Database connection verified
-- API response verified with HTTP 200
-- CORS verified
-- Frontend/backend integration verified
-- Production dashboard displays database data
+```text
+AI-POWERED-CRIMINAL-NETWORK-ANALYSIS-SYSTEM/
+│
+├── backend/
+│   ├── main.py
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   └── ...
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── ...
+│   ├── package.json
+│   └── vite.config.*
+│
+├── database/
+│
+├── documents/
+│   ├── AI_Criminal_Network_Analysis_Report.pdf
+│   └── AI_Criminal_Network_Analysis_Seminar.pptx
+│
+├── migrate_sqlite_to_postgres.py
+├── crime_intelligence.db
+├── crime_intelligence.dump
+├── README.md
+└── ...
+```
 
 ---
 
-## 🖼️ Screenshots
+# ⚙️ Installation & Setup
 
-Add your screenshots to a `docs/screenshots/` folder and update the file names below.
+## 1. Clone the Repository
 
-| Login | Command Center |
-|---|---|
-| ![Login](docs/screenshots/login.png) | ![Dashboard](docs/screenshots/dashboard.png) |
+```bash
+git clone https://github.com/akshayh0/AI-POWERED-CRIMINAL-NETWORK-ANALYSIS-SYSTEM.git
+```
 
-| Criminal Linkage Network | AI Intelligence Modules |
-|---|---|
-| ![Network](docs/screenshots/network.png) | ![AI](docs/screenshots/ai-modules.png) |
-
-| Crime Map | Officer Registry |
-|---|---|
-| ![Map](docs/screenshots/map.png) | ![Officers](docs/screenshots/officers.png) |
+```bash
+cd AI-POWERED-CRIMINAL-NETWORK-ANALYSIS-SYSTEM
+```
 
 ---
 
-## ⚙️ Local Setup
+## 2. Backend Setup
 
-> Adjust folder names and environment variable names below to match your repository.
-
-### Backend
+Navigate to the backend:
 
 ```bash
 cd backend
+```
+
+Create a virtual environment:
+
+```bash
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+```
+
+Activate it on Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
-Create a `.env` file (example names, use the ones your code reads):
+Create a `.env` file and configure the required environment variables:
 
 ```env
-DATABASE_URL=your_postgresql_connection_string
+DATABASE_URL=your_postgresql_database_url
 GROQ_API_KEY=your_groq_api_key
+FRONTEND_URL=your_frontend_url
 ```
 
+Run the backend:
+
 ```bash
-flask run                       # development
-gunicorn app:app                # production (change "app:app" to your entry point)
+python main.py
+```
+
+---
+
+# 💻 Frontend Setup
+
+Open another terminal:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The frontend will normally be available at:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 🔐 Environment Variables
+
+Do not commit API keys or passwords to GitHub.
+
+### Backend
+
+```env
+DATABASE_URL=
+GROQ_API_KEY=
+FRONTEND_URL=
 ```
 
 ### Frontend
 
-```bash
-cd frontend
-npm install
-npm run dev
+```env
+VITE_API_URL=
+VITE_FIREBASE_API_KEY=
+VITE_FIREBASE_AUTH_DOMAIN=
+VITE_FIREBASE_PROJECT_ID=
+VITE_FIREBASE_STORAGE_BUCKET=
+VITE_FIREBASE_MESSAGING_SENDER_ID=
+VITE_FIREBASE_APP_ID=
 ```
 
-Set the backend API URL in the frontend environment file (for example `VITE_API_URL`).
+Use `.env.example` files for sharing the required variable names without exposing secret values.
 
 ---
 
-## 🔮 Future Scope
+# 🌐 Deployment
 
-- More advanced graph / network algorithms
-- Improved predictive analytics
-- Real-time police data integration
-- More advanced anomaly detection
-- Role-based access control enhancements
-- Mobile application
-- More sophisticated AI models
+The project is deployed using:
+
+```text
+Frontend
+   ↓
+Vercel
+
+Backend
+   ↓
+Render
+
+Database
+   ↓
+PostgreSQL
+```
+
+The frontend communicates with the deployed Flask backend through REST APIs.
 
 ---
 
-## 👥 Team
+# 📊 Current Database Statistics
 
-| Name | Role |
-|---|---|
-| Akshay H | Team TRAILBLAZERS |
-| Omkar K S | Team TRAILBLAZERS |
+The deployed system currently provides crime statistics such as:
+
+| Metric          | Value |
+| --------------- | ----: |
+| Total FIRs      |   120 |
+| Total Accused   |    79 |
+| Total Victims   |   120 |
+| Total Districts |     7 |
+| Total Stations  |    29 |
+| Solved Cases    |   110 |
+| Pending Cases   |    10 |
+| Closed Cases    |    59 |
+| Charge-Sheeted  |    51 |
+| Today's FIRs    |     1 |
+
+These values are retrieved from the connected PostgreSQL-backed application.
 
 ---
 
-> ⚠️ Cap Stone project. AI-generated insights are decision-support aids and must not replace investigator judgment.
+# 📸 Project Documentation
+
+Project documentation and seminar materials are available in the `documents` folder.
+
+### 📄 Project Report
+
+`documents/AI_Criminal_Network_Analysis_Report.pdf`
+
+### 📊 Seminar Presentation
+
+`documents/AI_Criminal_Network_Analysis_Seminar.pptx`
+
+---
+
+# 🎓 Academic Project
+
+**Project Title:**
+AI-Powered Criminal Network Analysis System
+
+**Domain:**
+Artificial Intelligence / Data Analytics / Crime Intelligence
+
+**Purpose:**
+Academic project and demonstration of an AI-assisted crime analytics platform.
+
+---
+
+# 🔮 Future Enhancements
+
+Possible future improvements include:
+
+* Real-time crime data integration
+* Advanced geospatial crime prediction
+* More sophisticated graph/network analysis
+* Improved AI reasoning over crime records
+* Mobile application
+* Automated report generation
+* Advanced role-based access control
+* Real-time alerts
+* Larger and more diverse datasets
+* Integration with additional government data sources
+
+---
+
+# ⚠️ Limitations
+
+* The accuracy of analytics depends on the quality and completeness of available crime data.
+* AI-generated insights depend on the data provided to the system.
+* The current system is primarily intended for academic/project demonstration.
+* Production deployment would require additional security, auditing, and compliance controls.
+
+---
+
+# 👨‍💻 Author
+
+**Akshay H** **Omkar KS**
+
+Artificial Intelligence & Machine Learning and ISE
+Alva's Institute of Engineering & Technology
+Visvesvaraya Technological University (VTU)
+
+---
+
+# 📜 Disclaimer
+
+This project is developed for academic and demonstration purposes.
+
+The system does not replace professional investigation, law-enforcement procedures, or official decision-making. AI-generated results should be treated as analytical assistance and should be verified against official records.
+
+````
+
